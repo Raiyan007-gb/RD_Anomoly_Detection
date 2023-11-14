@@ -47,8 +47,8 @@ def train(_class_, pars):
 
     data_transform, gt_transform = get_data_transforms(pars.image_size, pars.image_size)
     
-    train_path = '/content/Revisiting-Reverse-Distillation/BrainMri_HeadCT/' + _class_ + '/train'
-    test_path = '/content/Revisiting-Reverse-Distillation/BrainMri_HeadCT/' + _class_
+    train_path = '/content/RD_Anomoly_Detection/BrainMri_HeadCT/' + _class_ + '/train'
+    test_path = '/content/RD_Anomoly_Detection/BrainMri_HeadCT/' + _class_
     
     if not os.path.exists(pars.save_folder + '/' + _class_):
         os.makedirs(pars.save_folder + '/' + _class_)

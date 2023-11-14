@@ -34,7 +34,7 @@ def inference(_class_, pars):
 
     data_transform, gt_transform = get_data_transforms(pars.image_size, pars.image_size)
     
-    test_path = '/content/Revisiting-Reverse-Distillation/BrainMri_HeadCT/' + _class_
+    test_path = '/content/RD_Anomoly_Detection/BrainMri_HeadCT/' + _class_
 
     checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_'+_class_+'.pth'
     test_data = MVTecDataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
