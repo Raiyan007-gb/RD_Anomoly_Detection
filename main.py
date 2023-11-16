@@ -17,7 +17,7 @@ from model.resnet import resnet18, resnet34, resnet50, wide_resnet50_2
 from model.de_resnet import de_resnet18, de_resnet34, de_wide_resnet50_2, de_resnet50
 from utils.utils_test import evaluation_multi_proj
 from utils.utils_train import MultiProjectionLayer, Revisit_RDLoss, loss_fucntion
-from dataset.dataset import MVTecDataset_test, MVTecDataset_train, get_data_transforms
+from dataset.dataset import BrainMri_HeadCT_Dataset_test, BrainMri_HeadCT_Dataset_train, get_data_transforms
 
 def setup_seed(seed):
     torch.manual_seed(seed)
@@ -53,8 +53,8 @@ def train(_class_, pars):
     if not os.path.exists(pars.save_folder + '/' + _class_):
         os.makedirs(pars.save_folder + '/' + _class_)
     save_model_path  = pars.save_folder + '/' + _class_ + '/' + 'wres50_'+_class_+'.pth'
-    train_data = MVTecDataset_train(root=train_path, transform=data_transform)
-    test_data = MVTecDataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
+    train_data = BrainMri_HeadCT_Dataset_train(root=train_path, transform=data_transform)
+    test_data = BrainMri_HeadCT_Dataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
     train_dataloader = torch.utils.data.DataLoader(train_data, batch_size=pars.batch_size, shuffle=True)
     test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
 

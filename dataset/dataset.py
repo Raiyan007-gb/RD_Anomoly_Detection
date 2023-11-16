@@ -39,7 +39,7 @@ def get_data_transforms(size, isize):
 
 
 
-class MVTecDataset_train(torch.utils.data.Dataset):
+class BrainMri_HeadCT_Dataset_train(torch.utils.data.Dataset):
     def __init__(self, root, transform):
         self.img_path = root
         self.simplexNoise = Simplex_CLASS()
@@ -76,7 +76,7 @@ class MVTecDataset_train(torch.utils.data.Dataset):
         return img_normal,img_noise,img_path.split('/')[-1]
 
 
-class MVTecDataset_test(torch.utils.data.Dataset):
+class BrainMri_HeadCT_Dataset_test(torch.utils.data.Dataset):
     def __init__(self, root, transform, gt_transform):
         self.img_path = os.path.join(root, 'test')
         self.gt_path = os.path.join(root, 'ground_truth')
