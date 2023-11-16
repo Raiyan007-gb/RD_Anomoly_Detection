@@ -8,7 +8,7 @@ from model.resnet import wide_resnet50_2
 from model.de_resnet import de_wide_resnet50_2
 from utils.utils_test import evaluation_multi_proj
 from utils.utils_train import MultiProjectionLayer
-from dataset.dataset import MVTecDataset_test, get_data_transforms
+from dataset.dataset import BrainMri_HeadCT_Dataset_test, get_data_transforms
 
 
 def setup_seed(seed):
@@ -37,7 +37,7 @@ def inference(_class_, pars):
     test_path = '/content/RD_Anomoly_Detection/BrainMri_HeadCT/' + _class_
 
     checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_'+_class_+'.pth'
-    test_data = MVTecDataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
+    test_data = BrainMri_HeadCT_Dataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
     test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
 
     # Use pretrained wide_resnet50 for encoder
