@@ -49,7 +49,7 @@ def inference(_class_, pars):
     decoder = decoder.to(device)
     proj_layer =  MultiProjectionLayer(base=64).to(device)
     # Load trained weights for projection layer, bn (OCBE), decoder (student)    
-    checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_brainMRI.pth'
+    checkpoint_class  = pars.checkpoint_folder + '/' + 'brainMRI' + '/' + 'wres50_brainMRI.pth'
     ckp = torch.load(checkpoint_class, map_location='cpu')
     proj_layer.load_state_dict(ckp['proj'])
     bn.load_state_dict(ckp['bn'])
