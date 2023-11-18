@@ -23,7 +23,7 @@ def get_args():
     parser = ArgumentParser()
     parser.add_argument('--checkpoint_folder', default = './your_checkpoint_folder', type=str)
     parser.add_argument('--image_size', default = 256, type=int)
-    parser.add_argument('--classes', nargs="+", default=["HeadCT", "brainMRI"])
+    parser.add_argument('--classes', nargs="+", default=["brainMRI"])
     pars = parser.parse_args()
     return pars
 
@@ -36,7 +36,7 @@ def inference(_class_, pars):
     
     test_path = '/content/RD_Anomoly_Detection/BrainMri_HeadCT/' + _class_
 
-    checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_'+_class_+'.pth'
+    checkpoint_class  = pars.checkpoint_folder + '/' + 'brainMRI' + '/' + 'wres50_brainMRI.pth'
     test_data = BrainMri_HeadCT_Dataset_test(root=test_path, transform=data_transform, gt_transform=gt_transform)
     test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
 
@@ -49,7 +49,7 @@ def inference(_class_, pars):
     decoder = decoder.to(device)
     proj_layer =  MultiProjectionLayer(base=64).to(device)
     # Load trained weights for projection layer, bn (OCBE), decoder (student)    
-    checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_'+_class_+'.pth'
+    checkpoint_class  = pars.checkpoint_folder + '/' + _class_ + '/' + 'wres50_brainMRI.pth'
     ckp = torch.load(checkpoint_class, map_location='cpu')
     proj_layer.load_state_dict(ckp['proj'])
     bn.load_state_dict(ckp['bn'])
@@ -63,7 +63,7 @@ def inference(_class_, pars):
 if __name__ == '__main__':
     pars = get_args()
 
-    item_list = [ 'HeadCT','brainMRI','bottle']
+    item_list = [ 'HeadCT','brainMRI','Brain_Tumor_Cross_Dataset']
     setup_seed(111)
     metrics = {'class': [], 'AUROC_sample':[], 'AUROC_pixel': [], 'AUPRO_pixel': []}
     
